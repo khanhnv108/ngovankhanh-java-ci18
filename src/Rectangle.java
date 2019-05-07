@@ -49,11 +49,6 @@ public class Rectangle {
         // true - true
         // true - true
         // false - false
-
-        //test
-//        Rectangle rect4 = new Rectangle(0,1,1,1);
-//        Rectangle rect5 = new Rectangle(0,0,3,2);
-//        System.out.println(rect4.intersects(rect5) + " - " + false);
-
+        
     }
 }
