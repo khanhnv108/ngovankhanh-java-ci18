@@ -23,9 +23,9 @@ public class GamePanel extends JPanel {
         super.paint(g);
         this.background.render(g);
         this.player.render(g);
-        for (PlayerBullet bullet: Player.playerBullets) {
-            bullet.render(g);
-        }
+//        for (PlayerBullet bullet: Player.playerBullets) {
+//            bullet.render(g);
+//        }
     }
 
     public void gameLoop() {
@@ -49,8 +49,8 @@ public class GamePanel extends JPanel {
         // background run
         this.background.run();
         // bullet run
-        for (PlayerBullet bullet: Player.playerBullets) {
-            bullet.run();
-        }
+//        for (PlayerBullet bullet: Player.playerBullets) {
+//            bullet.run();
+//        }
     }
 }
