@@ -54,13 +54,21 @@ public class Player {
             bullet.position.set(this.position.x, this.position.y);
             playerBullets.add(bullet);
 
+            PlayerBullet bullet1 = new PlayerBullet();
+            bullet1.position.set(this.position.x - 10, this.position.y);
+            playerBullets.add(bullet1);
+
             PlayerBullet bullet2 = new PlayerBullet();
-            bullet2.position.set(this.position.x - 10, this.position.y);
+            bullet2.position.set(this.position.x + 10, this.position.y);
             playerBullets.add(bullet2);
 
             PlayerBullet bullet3 = new PlayerBullet();
-            bullet3.position.set(this.position.x + 10, this.position.y);
+            bullet3.position1.set(this.position.x - 15, this.position.y+5);
             playerBullets.add(bullet3);
+
+            PlayerBullet bullet4 = new PlayerBullet();
+            bullet4.position2.set(this.position.x + 15, this.position.y+5);
+            playerBullets.add(bullet4);
 
             count = 0;
         }

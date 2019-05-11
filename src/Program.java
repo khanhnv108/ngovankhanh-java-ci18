@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 // alt + enter: sua loi code
 // (fn)shift + f6: doi ten
 // alt + ctrl + l: format code
+// ctrl + d : x2 dong
 
 //test123
 
