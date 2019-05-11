@@ -6,32 +6,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel {
-    BufferedImage playerImage;
-    Vector2D playerPosition;
-//    double playerX;
-//    double playerY;
-
-    BufferedImage backgroundImage;
-    Vector2D backgroundPosition;
-//    int backgroundX;
-//    int backgroundY;
+    Player player;
+    Background background;
 
     public GamePanel() {
-        playerImage = SpriteUtils.loadImage("assets/images/players/straight/0.png");
-//        playerX = 200;
-//        playerY = 500;
-        playerPosition = new Vector2D(200, 500);
-        backgroundImage = SpriteUtils.loadImage("assets/images/background/0.png");
-//        backgroundX = 0;
-//        backgroundY = 600 - 3109;
-        backgroundPosition = new Vector2D(0, 600 - 3109);
+        // player position
+        this.player = new Player();
+        this.player.position.set(200,500);
+        // background position
+        this.background = new Background();
+        this.background.position.set(0,600-3109);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(backgroundImage, (int) backgroundPosition.x, (int) backgroundPosition.y, null);
-        g.drawImage(playerImage, (int) playerPosition.x, (int) playerPosition.y, null);
+        this.background.render(g);
+        this.player.render(g);
+        for (PlayerBullet bullet: Player.playerBullets) {
+            bullet.render(g);
+        }
     }
 
     public void gameLoop() {
@@ -51,28 +45,12 @@ public class GamePanel extends JPanel {
 
     public void runAll() {
         // player run
-        if (KeyEventPress.isUpPress) {
-            playerPosition.y--;
-        }
-        if (KeyEventPress.isDownPress) {
-            playerPosition.y++;
-        }
-        if (KeyEventPress.isRightPress) {
-            playerPosition.x++;
-        }
-        if (KeyEventPress.isLeftPress) {
-            playerPosition.x--;
-        }
-
-        //playerX[0,384 - 32]
-        playerPosition.x = Mathx.clamp(playerPosition.x, 0, 384 - 28);
-        //playerY[0,600 - 48]
-        playerPosition.y = Mathx.clamp(playerPosition.y, 0, 600 - 40);
-
+        this.player.run();
         // background run
-        backgroundPosition.y += 10;
-        if (backgroundPosition.y >= 0) {
-            backgroundPosition.y = 0;
+        this.background.run();
+        // bullet run
+        for (PlayerBullet bullet: Player.playerBullets) {
+            bullet.run();
         }
     }
 }

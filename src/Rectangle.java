@@ -17,6 +17,22 @@ public class Rectangle {
         this.height = height;
     }
 
+    double top() {
+        return this.position.y;
+    }
+
+    double bottom() {
+        return this.top() + this.height;
+    }
+
+    double left() {
+        return this.position.x;
+    }
+
+    double right() {
+        return this.left() + this.width;
+    }
+
     /**
      * @return true if this rectangle intersects with the other rectangle
      * else return false
@@ -26,14 +42,11 @@ public class Rectangle {
 
     public boolean intersects(Rectangle other) {
         // TODO: 1. remove default return statement and fill logic check intersects 'this' and 'other'
-        if (other.position.x > this.position.x + this.width ||other.position.y >  this.position.y + this.height ) {
-            return false;
-        }
-        if (other.position.x + other.width < this.position.x+this.width && other.position.y + other.height < this.position.y + this.height)
-        {
-            return false;
-        }
-        return true;
+        return this.right() >= other.left()
+                && this.left() <= other.right()
+                && this.bottom() >= other.top()
+                && this.top() <= other.bottom();
+
     }
 
     public static void main(String[] args) {
@@ -49,6 +62,6 @@ public class Rectangle {
         // true - true
         // true - true
         // false - false
-        
+
     }
 }

@@ -45,6 +45,9 @@ public class Program {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     KeyEventPress.isRightPress = true;
                 }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    KeyEventPress.isFirePress = true;
+                }
             }
 
             @Override
@@ -60,6 +63,9 @@ public class Program {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     KeyEventPress.isRightPress = false;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    KeyEventPress.isFirePress = false;
                 }
             }
         };
