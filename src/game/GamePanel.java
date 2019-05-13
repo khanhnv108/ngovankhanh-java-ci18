@@ -1,29 +1,32 @@
-import tklibs.Mathx;
-import tklibs.SpriteUtils;
+package game;
+
+import game.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel {
     Player player;
     Background background;
+    Enemy enemy;
 
     public GamePanel() {
-        // player position
-        this.player = new Player();
-        this.player.position.set(200,500);
-        // background position
         this.background = new Background();
-        this.background.position.set(0,600-3109);
+        this.player = new Player();
+        this.enemy = new Enemy();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        this.background.render(g);
-        this.player.render(g);
-//        for (PlayerBullet bullet: Player.playerBullets) {
+        for (int i = 0; i < GameObject.objects.size(); i++) {
+            GameObject object = GameObject.objects.get(i);
+            if (object.active) {
+                object.render(g);
+            }
+        }
+
+//        for (game.player.PlayerBullet bullet: game.player.Player.playerBullets) {
 //            bullet.render(g);
 //        }
     }
@@ -44,12 +47,15 @@ public class GamePanel extends JPanel {
     }
 
     public void runAll() {
-        // player run
-        this.player.run();
-        // background run
-        this.background.run();
+        for (int i = 0; i < GameObject.objects.size(); i++) {
+            GameObject object = GameObject.objects.get(i);
+            if (object.active) {
+                object.run();
+            }
+        }
+
         // bullet run
-//        for (PlayerBullet bullet: Player.playerBullets) {
+//        for (game.player.PlayerBullet bullet: game.player.Player.playerBullets) {
 //            bullet.run();
 //        }
     }

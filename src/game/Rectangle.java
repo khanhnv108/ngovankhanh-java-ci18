@@ -1,3 +1,5 @@
+package game;
+
 public class Rectangle {
     public Vector2D position;
     public int width;
