@@ -23,7 +23,6 @@ Player extends GameObject {
         this.move();
         this.limitPosition();
         this.fire();
-        System.out.println(GameObject.objects.size());
     }
 
     private void fire() {
@@ -32,12 +31,16 @@ Player extends GameObject {
 //            PlayerBullet bullet = new PlayerBullet();
             PlayerBullet bullet = GameObject.recycle(PlayerBullet.class);
             bullet.position.set(this.position.x, this.position.y);
+            bullet.velocity.setAngle(Math.toRadians(-90));
 
             PlayerBullet bullet2 = GameObject.recycle(PlayerBullet.class);
             bullet2.position.set(this.position.x - 10, this.position.y);
+            bullet2.velocity.setAngle(Math.toRadians(-95));
+
 
             PlayerBullet bullet3 = GameObject.recycle(PlayerBullet.class);
             bullet3.position.set(this.position.x + 10, this.position.y);
+            bullet3.velocity.setAngle(Math.toRadians(-85));
 
             count = 0;
         }

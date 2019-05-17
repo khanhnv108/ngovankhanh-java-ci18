@@ -22,9 +22,9 @@ public class Program {
     public static void main(String[] args) {
         JFrame window = new JFrame();
         GamePanel panel = new GamePanel();
+
         panel.setBackground(Color.cyan);
         panel.setPreferredSize(new Dimension(800, 600));
-
 
         window.add(panel);
         window.pack();

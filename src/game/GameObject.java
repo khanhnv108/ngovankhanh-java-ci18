@@ -1,8 +1,10 @@
 package game;
 
+import game.physics.BoxCollider;
 import game.player.Player;
 import game.player.PlayerBullet;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -51,16 +53,35 @@ public class GameObject {  //player, Background, PlayerBullet..
         return null;
     }
 
+    public static <E extends GameObject> E findIntersects(Class<E> cls, BoxCollider hitBox) {
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject object = objects.get(i);
+            // 1. active
+            // 2. object ~ cls
+            // 3.  object.hitBox != null && object.hitBox.intersects(hitBox)
+            if (object.active
+                    && cls.isAssignableFrom(object.getClass())
+                    && object.hitBox != null
+                    && object.hitBox.intersects(hitBox)) {
+                return (E) object;
+            }
+        }
+        return null;
+    }
+
     // dinh nghia doi tuong
     public BufferedImage image; // = null
     public Vector2D position;
     public Boolean active;
+    public Vector2D velocity;
+    public BoxCollider hitBox; // = null
+
 
     public GameObject() {
         objects.add(this);
-//        System.out.println(objects.size());
         position = new Vector2D(); // (0, 0)
         active = true;
+        velocity = new Vector2D(); // (0, 0)
     }
 
     public void render(Graphics g) {
@@ -70,6 +91,7 @@ public class GameObject {  //player, Background, PlayerBullet..
     }
 
     public void run() {
+        position.add(velocity.x, velocity.y);
     }
 
     public void deactive() {

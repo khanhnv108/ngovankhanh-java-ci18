@@ -1,5 +1,7 @@
 package game;
 
+import game.enemy.Enemy;
+import game.enemy.EnemySummoner;
 import game.player.Player;
 
 import javax.swing.*;
@@ -8,12 +10,13 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     Player player;
     Background background;
-    Enemy enemy;
+
 
     public GamePanel() {
         this.background = new Background();
         this.player = new Player();
-        this.enemy = new Enemy();
+//        Enemy enemy = new Enemy();
+        EnemySummoner es = new EnemySummoner();
     }
 
     @Override
@@ -25,6 +28,10 @@ public class GamePanel extends JPanel {
                 object.render(g);
             }
         }
+
+        // TODO: continue
+//        g.setColor(Color.BLACK);
+//        g.fillRect(384,0,416,600);
 
 //        for (game.player.PlayerBullet bullet: game.player.Player.playerBullets) {
 //            bullet.render(g);
