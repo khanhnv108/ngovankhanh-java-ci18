@@ -16,7 +16,7 @@ Player extends GameObject {
 
     public Player() {
 //        this.image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
-        renderer = new Renderer("assets/images/players/straight/0.png");
+        renderer = new Renderer("assets/images/players/straight");
         position.set(200,500);
         hitBox = new BoxCollider(this, 32, 48);
         hp = 3;
@@ -52,7 +52,8 @@ Player extends GameObject {
         Item item = GameObject.findIntersects(Item.class, hitBox);
 
         if (item != null) {
-            this.hp = 1;
+            this.hp = 5;
+            item.deactive();
         }
     }
 

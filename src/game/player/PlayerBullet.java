@@ -12,7 +12,7 @@ public class    PlayerBullet extends GameObject {
 
     public PlayerBullet() {
 //        this.image = SpriteUtils.loadImage("assets/images/player-bullets/a/1.png");
-        renderer = new Renderer("assets/images/player-bullets/a/1.png");
+        renderer = new Renderer("assets/images/player-bullets/a");
 //        velocity = new Vector2D(0, -3);
         velocity.set(0, 5);
         hitBox = new BoxCollider(this, 24,24);

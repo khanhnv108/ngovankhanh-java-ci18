@@ -2,6 +2,7 @@ package game.enemy;
 
 import game.GameObject;
 import game.physics.BoxCollider;
+import game.player.Player;
 import game.renderer.Renderer;
 
 public class EnemyBullet extends GameObject {
@@ -23,7 +24,12 @@ public class EnemyBullet extends GameObject {
 
         // todo:continue
     private void checkPlayer() {
+        Player player = GameObject.findIntersects(Player.class, hitBox);
 
+        if (player != null) {
+            player.takeDamage(damage);
+            this.deactive();
+        }
     }
 
     private void deactiveIfNeeded() {
