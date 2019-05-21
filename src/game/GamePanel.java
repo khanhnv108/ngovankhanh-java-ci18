@@ -1,7 +1,7 @@
 package game;
 
-import game.enemy.Enemy;
 import game.enemy.EnemySummoner;
+import game.item.ItemSummoner;
 import game.player.Player;
 
 import javax.swing.*;
@@ -17,6 +17,7 @@ public class GamePanel extends JPanel {
         this.player = new Player();
 //        Enemy enemy = new Enemy();
         EnemySummoner es = new EnemySummoner();
+        ItemSummoner is = new ItemSummoner();
     }
 
     @Override

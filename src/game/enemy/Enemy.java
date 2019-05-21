@@ -2,18 +2,25 @@ package game.enemy;
 
 import game.GameObject;
 import game.physics.BoxCollider;
-import tklibs.SpriteUtils;
+import game.player.Player;
+import game.renderer.Renderer;
+
 
 public class Enemy extends GameObject {
     public int hp;
+    public int damage;
 
     public Enemy() {
-        image = SpriteUtils.loadImage("assets/images/enemies/level0/pink/0.png");
+//        image = SpriteUtils.loadImage("assets/images/enemies/level0/pink/0.png");
+//        renderer = new Renderer("assets/images/enemies/level0/pink/0.png");
+        renderer = new Renderer("assets/images/enemies/level0/pink");
         position.set(0, -50);
-        velocity.set(0, 2);
+        velocity.set(0, 3);
         velocity.setAngle(Math.toRadians(25));
         hitBox = new BoxCollider(this,28,28);
         hp = 5;
+        damage = 1;
+
     }
 
     public void takeDamage(int damage) {
@@ -24,28 +31,37 @@ public class Enemy extends GameObject {
         }
     }
 
+    int count = 0;
     @Override
     public void run() {
         super.run(); // velocity
+        this.fire();
+        this.checkPlayer();
 
         //Todo:continue
-        this.limitPosition();
-        this.fire();
+        this.move();
     }
 
-    int count = 0;
     private void fire() {
         count++;
         if (count > 20) {
             EnemyBullet bullet = GameObject.recycle(EnemyBullet.class);
-            bullet.position.set(this.position.x, this.position.y);
-            bullet.velocity.setAngle(Math.toRadians(-90));
-
+            bullet.position.set(position.x, position.y);
+            bullet.velocity.setAngle(Math.toRadians(90));
             count = 0;
         }
     }
 
-    private void limitPosition() {
+    private void checkPlayer() {
+        Player player = GameObject.findIntersects(Player.class, this.hitBox);
+        if (player != null) {
+            player.takeDamage(damage);
+            this.deactive();
+        }
+    }
+
+
+    private void move() {
         if (this.onGoingRight() && this.outOfBoundRight()) {
             this.reverseVelocityX();
         }
@@ -59,7 +75,7 @@ public class Enemy extends GameObject {
     public void reset() {
         super.reset(); // active = true
         position.set(0, -50);
-        velocity.set(0, 1.5);
+        velocity.set(0, 3);
         velocity.setAngle(Math.toRadians(25));
         hp = 5;
     }

@@ -3,18 +3,21 @@ package game.player;
 import game.GameObject;
 import game.enemy.Enemy;
 import game.physics.BoxCollider;
-import tklibs.SpriteUtils;
+import game.renderer.Renderer;
 
 
-public class PlayerBullet extends GameObject {
+
+public class    PlayerBullet extends GameObject {
     public int damage;
 
     public PlayerBullet() {
-        this.image = SpriteUtils.loadImage("assets/images/player-bullets/a/1.png");
+//        this.image = SpriteUtils.loadImage("assets/images/player-bullets/a/1.png");
+        renderer = new Renderer("assets/images/player-bullets/a/1.png");
 //        velocity = new Vector2D(0, -3);
         velocity.set(0, 5);
         hitBox = new BoxCollider(this, 24,24);
         damage = 1;
+
     }
 
     @Override

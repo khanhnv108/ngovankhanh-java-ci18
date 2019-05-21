@@ -5,19 +5,45 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by huynq on 5/11/17.
  */
 public class SpriteUtils {
 
-    public static BufferedImage loadImage(String url) {
+    public static BufferedImage loadImage(String fileUrl) {
         try {
-            return ImageIO.read(new File(url));
+            return ImageIO.read(new File(fileUrl));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ArrayList<BufferedImage> loadImages(String dirUrl) {
+        // TODO
+        ArrayList <BufferedImage> images = new ArrayList<>();
+        try {
+                String[] fileNames = new File(dirUrl).list();
+                Arrays.sort(fileNames);
+
+                for (String fileName : fileNames){
+                    if (fileName.toLowerCase().endsWith(".png")) {
+                        BufferedImage image = loadImage(dirUrl + "/" + fileName);
+                        images.add(image);
+                    }
+                }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return images;
+    }
+
+    public static void main(String[] args) {
+        loadImages("assets/images/players/straight");
     }
 
     public static void renderAtCenter(Graphics graphics, BufferedImage image, double x, double y) {

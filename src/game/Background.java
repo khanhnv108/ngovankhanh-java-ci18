@@ -1,11 +1,13 @@
 package game;
 
-import tklibs.SpriteUtils;
+import game.renderer.Renderer;
+
 
 public class Background extends GameObject {
 
     public Background() {
-        this.image = SpriteUtils.loadImage("assets/images/background/0.png");
+//        this.image = SpriteUtils.loadImage("assets/images/background/0.png");
+        renderer = new Renderer("assets/images/background/0.png");
         position.set(0, 600-3109);
     }
 

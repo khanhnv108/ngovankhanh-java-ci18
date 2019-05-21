@@ -2,14 +2,14 @@ package game.enemy;
 
 import game.GameObject;
 import game.physics.BoxCollider;
-import tklibs.SpriteUtils;
+import game.renderer.Renderer;
 
 public class EnemyBullet extends GameObject {
     public int damage;
 
     public EnemyBullet() {
-        this.image = SpriteUtils.loadImage("assets/images/enemies/bullets/pink.png");
-        velocity.set(0,3);
+        renderer = new Renderer("assets/images/enemies/bullets/pink.png");
+        velocity.set(0, 3);
         hitBox = new BoxCollider(this,16,16);
         damage = 1;
     }
@@ -17,7 +17,18 @@ public class EnemyBullet extends GameObject {
     @Override
     public void run() {
         super.run();
-//        this.deactiveIfNeeded();
-//        this.checkPlayer();
+        this.deactiveIfNeeded();
+        this.checkPlayer();
+    }
+
+        // todo:continue
+    private void checkPlayer() {
+
+    }
+
+    private void deactiveIfNeeded() {
+        if (position.y > 600) {
+            this.deactive();
+        }
     }
 }

@@ -1,19 +1,39 @@
 package game.player;
 
 import game.GameObject;
+import game.item.Item;
 import game.KeyEventPress;
+import game.physics.BoxCollider;
+import game.renderer.Renderer;
 import tklibs.Mathx;
-import tklibs.SpriteUtils;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class
 Player extends GameObject {
+    public int hp;
+    public boolean immune;
 
     public Player() {
-        this.image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
+//        this.image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
+        renderer = new Renderer("assets/images/players/straight/0.png");
         position.set(200,500);
+        hitBox = new BoxCollider(this, 32, 48);
+        hp = 3;
+        immune = false;
+    }
+
+    int renderCount = 0;
+    @Override
+    public void render(Graphics g) {
+        if (immune) {
+            renderCount++;
+            if (renderCount % 3 == 0) {
+                super.render(g);
+            }
+        } else {
+            super.render(g);
+        }
     }
 
     int count = 0; // dem so khung hinh
@@ -23,6 +43,42 @@ Player extends GameObject {
         this.move();
         this.limitPosition();
         this.fire();
+        this.checkImmune();
+        this.checkItem();
+    }
+
+    //todo
+    private void checkItem() {
+        Item item = GameObject.findIntersects(Item.class, hitBox);
+
+        if (item != null) {
+            this.hp = 1;
+        }
+    }
+
+    int immuneCount = 0;
+    private void checkImmune() {
+        if(immune) {
+            immuneCount++;
+            if (immuneCount > 120) {
+                immune = false;
+            }
+        }else {
+            immuneCount = 0;
+        }
+    }
+
+    public void takeDamage(int damage) {
+        if (!immune) {
+            hp -= damage;
+            if (hp <= 0) {
+                hp = 0;
+                this.deactive();
+            } else {
+                // roi vao trang thai bat tu
+                immune = true;
+            }
+        }
     }
 
     private void fire() {
