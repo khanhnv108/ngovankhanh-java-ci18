@@ -1,6 +1,7 @@
 package game.enemy;
 
 import game.GameObject;
+import game.Settings;
 import game.physics.BoxCollider;
 import game.player.Player;
 import game.renderer.Renderer;
@@ -33,7 +34,7 @@ public class EnemyBullet extends GameObject {
     }
 
     private void deactiveIfNeeded() {
-        if (position.y > 600) {
+        if (position.y > Settings.GAME_HEIGHT) {
             this.deactive();
         }
     }

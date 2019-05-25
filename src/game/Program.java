@@ -1,9 +1,12 @@
 package game;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 // ctrl + ? : comment / uncomment
 // ctrl + z / crtl + shift + z
@@ -24,7 +27,7 @@ public class Program {
         GamePanel panel = new GamePanel();
 
         panel.setBackground(Color.cyan);
-        panel.setPreferredSize(new Dimension(800, 600));
+        panel.setPreferredSize(new Dimension(Settings.GAME_WIDTH, Settings.GAME_HEIGHT));
 
         window.add(panel);
         window.pack();
@@ -72,7 +75,24 @@ public class Program {
                 }
             }
         };
+        // bat phim
         window.addKeyListener(keyHandler);
+        // bat chuot
+        MouseAdapter mouseHandler = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Settings.mouseClicked = true;
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                double x = e.getX() - window.getInsets().left;
+                double y = e.getY() - window.getInsets().top;
+                Settings.mousePosition.set(x, y);
+            }
+        };
+        window.addMouseListener(mouseHandler);
+        window.addMouseMotionListener(mouseHandler);
 
         window.setVisible(true);
 

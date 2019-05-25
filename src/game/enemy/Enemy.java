@@ -1,6 +1,8 @@
 package game.enemy;
 
 import game.GameObject;
+import game.Settings;
+import game.explosion.Explosion;
 import game.physics.BoxCollider;
 import game.player.Player;
 import game.renderer.Renderer;
@@ -28,6 +30,7 @@ public class Enemy extends GameObject {
         if (hp <= 0) {
             hp = 0;
             this.deactive();
+            Settings.score++;
         }
     }
 
@@ -81,7 +84,7 @@ public class Enemy extends GameObject {
     }
 
     private void deactiveIfNeeded() {
-        if (position.y > 600) {
+        if (position.y > Settings.GAME_HEIGHT) {
             this.deactive();
         }
     }
@@ -99,10 +102,18 @@ public class Enemy extends GameObject {
     }
 
     private boolean outOfBoundRight() {
-        return position.x > 384-30;
+        return position.x > Settings.BACKGROUND_WIDTH-30;
     }
 
     private boolean onGoingRight() {
         return velocity.x > 0;
+    }
+
+    @Override
+    public void deactive() {
+        super.deactive();
+        super.deactive();
+        Explosion explosion = GameObject.recycle(Explosion.class);
+        explosion.position.set(this.position.x, this.position.y);
     }
 }

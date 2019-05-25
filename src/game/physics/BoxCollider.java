@@ -7,16 +7,18 @@ public class BoxCollider {
     public int width;
     public int height;
     public Vector2D position;
+    public Vector2D anchor;
 
     public BoxCollider(GameObject master, int width, int height) {
         // Player( hitBox)
         this.position = master.position;
         this.width = width;
         this.height = height;
+        this.anchor = master.anchor;
     }
 
     public double top() {
-        return position.y;
+        return position.y - anchor.y * height;
     }
 
     public double bot() {
@@ -24,7 +26,7 @@ public class BoxCollider {
     }
 
     public double left() {
-        return position.x;
+        return position.x - anchor.x * width;
     }
 
     public double right() {

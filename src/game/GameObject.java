@@ -72,6 +72,7 @@ public class GameObject {  //player, Background, PlayerBullet..
     public Boolean active;
     public Vector2D velocity;
     public BoxCollider hitBox; // = null
+    public Vector2D anchor;
 
 
     public GameObject() {
@@ -79,6 +80,7 @@ public class GameObject {  //player, Background, PlayerBullet..
         position = new Vector2D(); // (0, 0)
         active = true;
         velocity = new Vector2D(); // (0, 0)
+        anchor = new Vector2D(0.5, 0.5);
     }
 
     public void render(Graphics g) {
